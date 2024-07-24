@@ -278,7 +278,7 @@ namespace SmallBasicANN
             {
                 string text = streamReader.ReadLine();
                 string[] array = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                if (array.Length != 1)
+                if (array.Length == 2)
                 {
                     array[0] = array[0].Trim();
                     array[0] = array[0].ToLower();

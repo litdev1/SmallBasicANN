@@ -4,13 +4,13 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.2.0.4")]
+[assembly: AssemblyVersion("1.2.0.5")]
 [assembly: Debuggable(DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyFileVersion("1.2.0.4")]
+[assembly: AssemblyFileVersion("1.2.0.5")]
 [assembly: AssemblyProduct("SmallBasicANN")]
 [assembly: AssemblyTitle("SmallBasicANN")]
 [assembly: AssemblyTrademark("")]

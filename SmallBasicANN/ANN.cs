@@ -238,8 +238,22 @@ namespace SmallBasicANN
 
         public ANN(string n, int[] l)
         {
+            Reset();
             name = n;
             structure = l;
+            numLayers = structure.Length;
+            numHidden = numLayers - 2;
+            numConnections = numLayers - 1;
+            outputLayer = numLayers - 1;
+            nodes = new double[numLayers][];
+            for (int i = 0; i < numLayers; i++)
+            {
+                nodes[i] = new double[structure[i]];
+            }
+        }
+
+        private void Reset()
+        {
             trained = 0;
             binaryOutput = true;
             epochs = 100000;
@@ -247,22 +261,15 @@ namespace SmallBasicANN
             momentum = 0.3;
             sigmoidResponse = 1.0;
             errorRequired = 0.0001;
-            numLayers = structure.Length;
-            numHidden = numLayers - 2;
-            numConnections = numLayers - 1;
             numBias = 1;
             randomSeed = -1;
-            outputLayer = numLayers - 1;
-            nodes = new double[numLayers][];
-            for (int i = 0; i < numLayers; i++)
-            {
-                nodes[i] = new double[structure[i]];
-            }
             isInitialised = false;
         }
 
         public ANN(string fn)
         {
+            Reset();
+
             int i, j, k;
             FileStream fileStream;
             try

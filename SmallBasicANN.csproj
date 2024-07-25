@@ -38,8 +38,9 @@
     <Compile Include="SmallBasicANN\NeuralNetwork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="SmallBasicLibrary">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft\Small Basic\SmallBasicLibrary.dll</HintPath>
+    <Reference Include="SmallBasicLibrary, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\SmallBasicLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

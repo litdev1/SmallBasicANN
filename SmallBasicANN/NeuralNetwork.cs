@@ -218,7 +218,7 @@ namespace SmallBasicANN
                 string[] data = null;
                 do
                 {
-                    binaryWriter.Write(ANN.NextData(streamReader, data, index));
+                    binaryWriter.Write(ANN.NextData(streamReader, ref data, ref index));
                 }
 				while (!streamReader.EndOfStream);
 				streamReader.Close();

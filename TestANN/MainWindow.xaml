@@ -1,0 +1,14 @@
+﻿<Window x:Class="TestANN.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestANN"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="buttonTest" Content="Test ANN" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="buttonTest_Click"/>
+        <TextBox x:Name="textBoxReport" HorizontalAlignment="Left" Margin="10,35,0,10" TextWrapping="Wrap" Width="780"/>
+
+    </Grid>
+</Window>

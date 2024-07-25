@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace SmallBasicANN
 {
-    internal class ANN
+    public class ANN
     {
         private string name;
         private int[] structure;
@@ -454,7 +454,7 @@ namespace SmallBasicANN
             Train(fn, fm);
         }
 
-        public static double NextData(StreamReader streamReader, string[] data, int index)
+        public static double NextData(StreamReader streamReader, ref string[] data, ref int index)
         {
             index++;
             while (data == null || index >= data.Length)
@@ -465,7 +465,7 @@ namespace SmallBasicANN
             return Convert.ToDouble(data[index]);
         }
 
-        public Primitive Train(string fn, bool fm)
+        public string Train(string fn, bool fm)
         {
             if (!isInitialised) InitialiseConnections();
             trained = epochs;
@@ -513,7 +513,7 @@ namespace SmallBasicANN
                     string text = streamReader.ReadLine();
                     if (text.Length > 0)
                     {
-                        i += 1;
+                        i += text.Split(new char[] { ',', ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries).Length;
                     }
                 }
                 while (!streamReader.EndOfStream);
@@ -535,11 +535,11 @@ namespace SmallBasicANN
                 {
                     for (i = 0; i < structure[0]; i++)
                     {
-                        trialInput[trial, i] = NextData(streamReader, data, index);
+                        trialInput[trial, i] = NextData(streamReader, ref data, ref index);
                     }
                     for (i = 0; i < structure[outputLayer]; i++)
                     {
-                        trialOutput[trial, i] = NextData(streamReader, data, index);
+                        trialOutput[trial, i] = NextData(streamReader, ref data, ref index);
                     }
                 }
                 streamReader.Close();
@@ -613,7 +613,7 @@ namespace SmallBasicANN
                 NeuralNetwork.lastANNProgress = "Finished";
                 NeuralNetwork._ANNProgressDelegate();
             }
-            return (double)trained;
+            return trained.ToString();
         }
 
         public string Use(string Input)

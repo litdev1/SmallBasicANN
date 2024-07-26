@@ -15,56 +15,23 @@ namespace TestANN
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool isTrained = false;
         private double scale = 100;
-        private bool train = true;
-        private string path = "";
+        string name = "";
+        string AnnData = "";
+        Random rand = new Random();
+        ANN aNN = null;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            path = Directory.GetCurrentDirectory();
+            name = "Mean";
+            AnnData = Directory.GetCurrentDirectory() + "/" + name + "_ANN.txt";
         }
 
-        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        private void testANN()
         {
-            Random rand = new Random();
-            string name = "Mean";
-            string AnnData = path + "/" + name + "_ANN.txt";
-            ANN aNN;
-
-            if (train)
-            {
-                int inputNode = 2;
-                int hiddenNode = 3;
-                int outputNode = 1;
-                int[] structure = new int[3] { inputNode, hiddenNode, outputNode };
-                string trainingData = path + "/" + name + ".txt";
-
-                aNN = new ANN(name, structure);
-                aNN.BinaryOutput = false;
-                aNN.Epochs = 1000;
-
-                using (StreamWriter sw = new StreamWriter(trainingData))
-                {
-                    for (int i = 0; i < 1000; i++)
-                    {
-                        int A = rand.Next((int)scale);
-                        int B = rand.Next((int)scale);
-                        double C = (A + B) / 2.0;
-                        sw.WriteLine((A / scale) + "," + (B / scale) + "," + (C / scale));
-                    }
-                }
-
-                aNN.Train(trainingData, false);
-                aNN.Save(AnnData);
-            }
-            else
-            {
-                aNN = new ANN(AnnData);
-                name = aNN.Name;
-            }
-
             textBoxReport.Text = "";
             textBoxReport.Text += "epoch=" + aNN.Trained + '\n';
             textBoxReport.Text += "BinaryOutput=" + aNN.BinaryOutput + '\n';
@@ -83,6 +50,51 @@ namespace TestANN
                 double _C = double.Parse(result[0]) * scale;
                 string report = "Mean(" + A + "," + B + ") = " + C + " (" + _C + ")";
                 textBoxReport.Text += report + '\n';
+            }
+        }
+
+        private void buttonTrain_Click(object sender, RoutedEventArgs e)
+        {
+            int inputNode = 2;
+            int hiddenNode = 3;
+            int outputNode = 1;
+            int[] structure = new int[3] { inputNode, hiddenNode, outputNode };
+            string trainingData = Directory.GetCurrentDirectory() + "/" + name + ".txt";
+
+            aNN = new ANN(name, structure);
+            aNN.BinaryOutput = false;
+            aNN.Epochs = 1000;
+
+            using (StreamWriter sw = new StreamWriter(trainingData))
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    int A = rand.Next((int)scale);
+                    int B = rand.Next((int)scale);
+                    double C = (A + B) / 2.0;
+                    sw.WriteLine((A / scale) + "," + (B / scale) + "," + (C / scale));
+                }
+            }
+
+            aNN.Train(trainingData, false);
+            aNN.Save(AnnData);
+            isTrained = true;
+
+            testANN();
+        }
+
+        private void buttonUse_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isTrained)
+            {
+                textBoxReport.Text = "ANN is not trained";
+            }
+            else
+            {
+                aNN = new ANN(AnnData);
+                name = aNN.Name;
+
+                testANN();
             }
         }
     }

@@ -57,7 +57,7 @@ namespace TestANN
                 }
 
                 aNN.Train(trainingData, false);
-                aNN.Save(path);
+                aNN.Save(AnnData);
             }
             else
             {

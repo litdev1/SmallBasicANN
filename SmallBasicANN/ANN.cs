@@ -420,7 +420,6 @@ namespace SmallBasicANN
             streamWriter.WriteLine("Random Seed: " + randomSeed);
             streamWriter.WriteLine();
             streamWriter.WriteLine("Synapses:");
-            text = "";
             for (int i = 0; i < connections.Length; i++)
             {
                 double[,] array1 = connections[i];
@@ -428,12 +427,10 @@ namespace SmallBasicANN
                 {
                     for (int k = array1.GetLowerBound(1); k <= array1.GetUpperBound(1); k++)
                     {
-                        double num = array1[j, k];
-                        text = text + num + "\r\n";
+                        streamWriter.WriteLine(array1[j, k]);
                     }
                 }
             }
-            text = text.Remove(text.Length - 2);
             streamWriter.Write(text);
             streamWriter.Close();
             fileStream.Close();
